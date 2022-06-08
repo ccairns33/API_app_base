@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head%}
+    <title>GNMC KPI Data Input</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>GNMC KPI Data Input Page</h1>
+        <form method="POST" class="kpi-data-input">
+            {{ form.hidden_tag() }}
+            <h3>KPI Data Input</h3>
+
+            {{ form.company.label() }}
+            {{ form.company(class="form-control")}}
+
+            <br>
+
+            <div class="form-options">
+                {{ form.submit(class="btn btn-md btn-block btn-primary") }}
+            </div>
+            
+        </form>
+
+    </div>
+</div>
+{% endblock %}
