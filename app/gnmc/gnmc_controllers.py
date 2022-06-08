@@ -1,5 +1,5 @@
 # Import flask dependencies
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
+from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, current_app
 
 # Import password / encryption helper tools
 from werkzeug.security import generate_password_hash, check_password_hash
