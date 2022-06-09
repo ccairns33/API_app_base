@@ -10,11 +10,14 @@ from app import db
 # Import module forms
 from app.gnmc.gnmc_forms import DataForm
 
+# import blueprint from the init.py file
+from app.gnmc import mod_gnmc
+
 # Import module models (i.e. User)
 # from app.api.gnmc_models import Data
 
 # Define the blueprint: 'gnmc', set its url prefix: app.url/gnmc
-mod_gnmc = Blueprint('gnmc',__name__, url_prefix='/gnmc')
+# mod_gnmc = Blueprint('gnmc',__name__, url_prefix='/gnmc')
 # url_name.com/gnmc/supplemental
 # Set the route and accepted methods
 

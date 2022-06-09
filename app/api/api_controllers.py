@@ -1,11 +1,16 @@
 # Import flask dependencies
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
-
+from flask import Blueprint, request, render_template, flash, session, redirect, url_for
 # Import password / encryption helper tools
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_restful import Resource
 
 # Import the database object from the main app module
-from app import db
+# from app import db
+# Import the api object 
+from app import api
+
+# import blueprint from the init.py file
+from app.api import mod_api
 
 # Import module forms
 from app.api.api_forms import LoginForm
@@ -14,7 +19,8 @@ from app.api.api_forms import LoginForm
 from app.api.api_models import User
 
 # Define the blueprint: 'api', set its url prefix: app.url/api
-mod_api = Blueprint('api', __name__, url_prefix='/api')
+# mod_api = Blueprint('api', __name__, url_prefix='/api')
+
 
 # url_name.com/api/supplemental
 # Set the route and accepted methods
