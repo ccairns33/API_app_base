@@ -2,9 +2,11 @@
 # We will define this inside /app/__init__.py in the next sections.
 from app import db
 
+
 # Data model is an abstract representaion of the database
 # Schema describes the layout of the data IN the database:
     # what kinda of fields are present and how they are organized
+    # contains a definition of what data our application deals with
 
 # Define a base model for other database tables to inherit
 class Base(db.Model):

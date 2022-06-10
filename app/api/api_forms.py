@@ -16,4 +16,3 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', [
                 DataRequired(message='Must provide a password. ;-)')])
 
-# https://dev.azure.com/expd-geo-americas/Solutions/_boards/board/t/CDA/Requirments
