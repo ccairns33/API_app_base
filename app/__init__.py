@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request, render_template
 from app.config import Config
 from app.api.resources.helloworld import HelloWorld
-#Import SQLAlchemy
+
+# Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource, reqparse
 
@@ -22,19 +23,16 @@ def register_error_handlers(app):
 # This will create the database file using SQLAlchemy
 
 
-         
-
-
 # Application Factory
 def create_app(config_class=Config):
-    # Define the WSGI application object 
+    # Define the WSGI application object
     app = Flask(__name__)
 
     # Configurations
     app.config.from_object(Config)
-    
+
     # api resources
-    # api resources MUST be bound BEFORE initializing with api.init_app(app) 
+    # api resources MUST be bound BEFORE initializing with api.init_app(app)
     api.add_resource(HelloWorld, "/api/<string:name>")
 
     api.init_app(app)
@@ -44,12 +42,9 @@ def create_app(config_class=Config):
     from app.api.api_controllers import mod_api as api_module
     from app.gnmc.gnmc_controllers import mod_gnmc as gnmc_module
 
-
     # Register blueprint(s)
     app.register_blueprint(api_module)
     app.register_blueprint(gnmc_module)
-
-    
 
     # Register Errors
     # register_error_handlers(app)

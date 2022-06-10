@@ -1,12 +1,13 @@
 # Import flask dependencies
 from flask import Blueprint, request, render_template, flash, session, redirect, url_for
+
 # Import password / encryption helper tools
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_restful import Resource
 
 # Import the database object from the main app module
 # from app import db
-# Import the api object 
+# Import the api object
 from app import api
 
 # import blueprint from the init.py file
@@ -24,9 +25,9 @@ from app.api.api_models import User
 
 # url_name.com/api/supplemental
 # Set the route and accepted methods
-@mod_api.route('/supplemental', methods=['GET', 'POST'])
+@mod_api.route("/supplemental", methods=["GET", "POST"])
 def signin_page():
-    # TODO: Not necessary just filler info 
+    # TODO: Not necessary just filler info
 
     # If sign in form is submitted
     form = LoginForm(request.form)
@@ -35,13 +36,14 @@ def signin_page():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
-            session['user_id'] = user.id
-            flash('Welcome %s' % user.name)
-            return redirect(url_for('api.home'))
-        flash('Wrong email or password', 'error-message')
+            session["user_id"] = user.id
+            flash("Welcome %s" % user.name)
+            return redirect(url_for("api.home"))
+        flash("Wrong email or password", "error-message")
     return render_template("api/signin.html", form=form)
 
+
 # url_name.com/api/supplemental/kpi-transit-data
-@mod_api.route('/supplemental/kpi-transit-data', methods=['GET', 'POST'])
+@mod_api.route("/supplemental/kpi-transit-data", methods=["GET", "POST"])
 def api_kpi_transit_data_page():
     return "API | KPI transit data"
