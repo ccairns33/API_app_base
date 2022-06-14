@@ -21,6 +21,7 @@ class HelloWorld(Resource):
     def post(self, name):
         posted_data = request.get_json()
         try:
+            # make sure there are no validation errors
             data = person_schema.load(posted_data)
         except ValidationError as err:
             return err.messages,400
