@@ -18,7 +18,18 @@ def register_error_handlers(app):
     def not_found():
         return render_template("404.html"), 404
 
+class Person(db.Model):
+    __tablename__ = 'persons'
 
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(30), unique=False, nullable=False)
+    age = db.Column(db.Integer(), unique=False, nullable=False)
+    gender = db.Column(db.String(6), unique=False, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f"<Person {self.id}: name={self.name}, email={self.email}>"
+        
 # Build the database
 # This will create the database file using SQLAlchemy
 
@@ -37,6 +48,7 @@ def create_app(config_class=Config):
 
     api.init_app(app)
     db.init_app(app)
+
 
     # import a module / component using its blueprint handler variable
     from app.api.api_controllers import mod_api as api_module
