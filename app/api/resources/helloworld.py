@@ -2,7 +2,7 @@ from flask_restful import Resource, request
 from flask import jsonify, current_app
 from app.api.schemas.person_schema import PersonSchema
 from marshmallow import ValidationError
-from app.models.person_model import Person
+from app.api.models.person_model import Person
 # solves circular import...
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
