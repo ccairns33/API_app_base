@@ -2,7 +2,7 @@ from flask_restful import Resource, request
 from flask import jsonify, current_app
 from app.api.schemas.person_schema import PersonSchema
 from marshmallow import ValidationError
-from app.api.models.person_model import Person
+from app.api.models.person_model import PersonModel
 # solves circular import...
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
@@ -22,20 +22,20 @@ class HelloWorld(Resource):
         posted_data = request.get_json()
         try:
             # make sure there are no validation errors
-            data = person_schema.load(posted_data)
+            # with Marshmallow and model, the .load(posted data) creates and data object of person 
+            person_dict = person_schema.load(posted_data)
         except ValidationError as err:
-            return err.messages,400
-        # names[name] is type dict
-        # return jsonify(data)
+            return f"Errors: {err.messages}",400
+        print(person_dict)
+        # must pass in PersonModel for Self. not sure why.
+        if PersonModel.find_by_email(PersonModel,email=person_dict["email"]):
+            return {"message": "Person is already here."}, 400
 
-        if Person.query.filter(Person.email == posted_data.get("email", "")).first():
-            return {"message": "Person is already here."}
-        else:
-            person = Person(**data)
-            db.session.add(person)
-            db.session.commit()
-            return "Person added to the database"
-    
+        person = PersonModel(**person_dict)
+        person.save_to_db()
+
+        return {"message": "Person added to the database"}, 201
+            
     def get(self, name):
         return names[name]
 

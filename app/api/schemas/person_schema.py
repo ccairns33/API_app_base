@@ -1,7 +1,14 @@
-from marshmallow import Schema, fields
+from flask_marshmallow import Marshmallow
+from marshmallow import EXCLUDE
+from app.api.models.person_model import PersonModel
 
-class PersonSchema(Schema):
-    name = fields.Str(required=True)
-    age = fields.Int(required=True)
-    gender = fields.Str(required=True)
-    email = fields.Str(required=True)
+ma = Marshmallow()
+
+class PersonSchema(ma.Schema):
+    class Meta:
+        # must have fields labeled or will result in Unknown Field errors
+        fields = ("id", "name", "age", "gender", "email" )
+        model = PersonModel
+        # load_only = ("email",)
+    
+   
