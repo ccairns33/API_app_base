@@ -14,6 +14,10 @@ names = {
 }
 
 person_schema = PersonSchema()
+persons_schema = PersonSchema(many=True)
+# Marshmallow Data Serialization:
+# Serialization is the process of converting a Python object
+# into a format that can be stored in a database or transmitted.
 
 class HelloWorld(Resource):
     # if instance method does not use self, then it can be class method and change self to cls
@@ -24,6 +28,7 @@ class HelloWorld(Resource):
             # make sure there are no validation errors
             # with Marshmallow and model, the .load(posted data) creates and data object of person 
             person_dict = person_schema.load(posted_data)
+            # returns json object (dict)
         except ValidationError as err:
             return f"Errors: {err.messages}",400
         print(person_dict)
@@ -34,7 +39,10 @@ class HelloWorld(Resource):
         person = PersonModel(**person_dict)
         person.save_to_db()
 
-        return {"message": "Person added to the database"}, 201
+        # Marshmallow DUMP: Serializes object person, which returns json object (dict)
+        # without serializing data, the object will be of type PersonModel
+        result = PersonSchema.dump(person_schema,person)
+        return result, 201
             
     def get(self, name):
         return names[name]

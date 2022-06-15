@@ -5,7 +5,7 @@ from app.api.resources.helloworld import HelloWorld
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
-from flask_restful import Api, Resource, reqparse
+from flask_restful import Api, Resource
 from flask_marshmallow import Marshmallow
 
 # Define the database object which is imported by modules and controllers
