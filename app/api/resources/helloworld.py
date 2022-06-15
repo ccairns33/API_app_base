@@ -15,9 +15,11 @@ names = {
 
 person_schema = PersonSchema()
 persons_schema = PersonSchema(many=True)
-# Marshmallow Data Serialization:
-# Serialization is the process of converting a Python object
+# Marshmallow Data Deserialization:
+# Deserialization is the process of converting a Python object
 # into a format that can be stored in a database or transmitted.
+    # per the internet. mine is not doing that? remaining as dict...
+    # I convert it to a personModel before I save to the db
 
 class HelloWorld(Resource):
     # if instance method does not use self, then it can be class method and change self to cls
@@ -26,7 +28,8 @@ class HelloWorld(Resource):
         posted_data = request.get_json()
         try:
             # make sure there are no validation errors
-            # with Marshmallow and model, the .load(posted data) creates and data object of person 
+            # with Marshmallow and model, the .load(posted_data) converts
+            # data from python to JSON (dict)
             person_dict = person_schema.load(posted_data)
             # returns json object (dict)
         except ValidationError as err:

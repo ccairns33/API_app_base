@@ -7,7 +7,8 @@ ma = Marshmallow()
 class PersonSchema(ma.Schema):
     class Meta:
         # must have fields labeled or will result in Unknown Field errors
-        fields = ("id", "name", "age", "gender", "email" )
+        # no need to add id field, will be added automatically
+        fields = ("name", "age", "gender", "email" )
         model = PersonModel
         # load_only = ("email",)
     
